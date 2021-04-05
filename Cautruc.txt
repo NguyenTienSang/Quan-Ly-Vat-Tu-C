@@ -1,0 +1,87 @@
+#include<iostream>
+#include<string.h>
+//#include "TaoKhung.h"
+using namespace std;
+#define SLNV 700
+//=============== KHAI BAO CAU TRUC ===============
+//======== DANH SACH VAT TU (CAY NHI PHAN TIM KIEM) =============
+struct Vat_tu
+{
+	char MAVT[10];
+	char TENVT[50];
+	char DVT[30];
+	float SOLT;
+	//pointer
+	struct Vat_tu *pLeft;
+	struct Vat_tu *pRight;
+};
+typedef struct Vat_tu* TREE_VAT_TU;
+
+struct DS_Vat_tu
+{
+	TREE_VAT_TU dsvt = NULL;
+//	int slvt = 0;
+};
+typedef struct DS_Vat_Tu DS_VAT_TU;
+
+//====== DANH SACH CHI TIET HOA DON (DANH SACH TUYEN TINH) ===================
+struct Chi_tiet_hoa_don
+{
+	char MAVT[10];
+	int SLVT;
+	float DONGIA;
+	float VAT;
+	bool TRANGTHAI;//TRUE : La khach mua, FALSE : La khach tra
+};
+typedef struct Chi_tiet_hoa_don CHI_TIET_HOA_DON;
+
+struct DS_chi_tiet_hoa_don
+{
+	CHI_TIET_HOA_DON ds[20];//->SUA LAI
+//	int sl = 0;
+};
+typedef struct DS_chi_tiet_hoa_don DS_CHI_TIET_HOA_DON;
+//======= DANH SACH HOA DON (DAN SACH LIEN KET DON) ================
+struct Date{
+	int day;
+	int month;
+	int year;
+};
+typedef struct date DATE;
+
+struct Hoa_don
+{
+	char SOHD[20];
+	Date NgayLap;
+	char LOAI[1];//N : Nhap, X : Xuat
+	DS_CHI_TIET_HOA_DON ds_chi_tiet_hd;
+	//pointer
+	Hoa_don *pNext;
+};
+typedef struct hoa_don HOA_DON;
+
+struct DS_hoa_don//nut hoa don
+{
+	HOA_DON *pHead = NULL;
+//	int slhd = 0;
+};
+typedef struct DS_hoa_don DS_HOA_DON;
+
+//======= DANH SACH NHAN VIEN (MANG CON TRO) =====================
+struct Nhan_vien
+{
+	int MANV;
+	char HO[30];
+	char TEN[10];
+	char PHAI[3];
+	char CMND[12];
+	DS_HOA_DON* DSHD; 
+};
+typedef struct Nhan_vien NHAN_VIEN;
+
+struct DS_Nhan_vien
+{
+	NHAN_VIEN *nv[SLNV];
+//	int slnv = 0;
+};
+typedef struct DS_Nhan_vien DS_NHAN_VIEN;
